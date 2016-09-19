@@ -1,10 +1,10 @@
 ## Access Modifiers
 snippet po
-	protected ${0}
+	protected
 snippet pu
-	public ${0}
+	public
 snippet pr
-	private ${0}
+	private
 ##
 ## Annotations
 snippet before
@@ -25,7 +25,7 @@ snippet oo
 ##
 ## Basic Java packages and import
 snippet im
-	import ${0}
+	import
 snippet j.b
 	java.beans.
 snippet j.i
@@ -39,19 +39,17 @@ snippet j.u
 ##
 ## Class
 snippet cl
-	class ${1:`vim_snippets#Filename("$1", "untitled")`} ${0}
-snippet pcl
-	public class ${1:`vim_snippets#Filename("$1", "untitled")`} ${0}
+	class ${1:`vim_snippets#Filename("", "untitled")`} ${0}
 snippet in
-	interface ${1:`vim_snippets#Filename("$1", "untitled")`} ${2:extends Parent}
+	interface ${1:`vim_snippets#Filename("", "untitled")`} ${2:extends Parent}
 snippet tc
-	public class ${1:`vim_snippets#Filename("$1")`} extends ${0:TestCase}
+	public class ${1:`vim_snippets#Filename()`} extends ${0:TestCase}
 ##
 ## Class Enhancements
 snippet ext
-	extends ${0}
+	extends
 snippet imp
-	implements ${0}
+	implements
 ##
 ## Comments
 snippet /*
@@ -91,40 +89,15 @@ snippet m
 snippet v
 	${1:String} ${2:var}${3: = null}${4};
 ##
-## Declaration for ArrayList
-snippet d.al
-	List<${1:Object}> ${2:list} = new ArrayList<$1>();${0}
-## Declaration for HashMap
-snippet d.hm
-	Map<${1:Object}, ${2:Object}> ${3:map} = new HashMap<$1, $2>();${0}
-## Declaration for HashSet
-snippet d.hs
-	Set<${1:Object}> ${2:set} = new HashSet<$1>();${0}
-## Declaration for Stack
-snippet d.st
-	Stack<${1:Object}> ${2:stack} = new Stack<$1>();${0}
-##
-## Singleton Pattern
-snippet singlet
-	private static class Holder {
-		private static final ${1:`vim_snippets#Filename("$1")`} INSTANCE = new $1();
-	}
-
-	private $1() { }
-
-	public static $1 getInstance() {
-		return Holder.INSTANCE;
-	}
-##
 ## Enhancements to Methods, variables, classes, etc.
 snippet ab
-	abstract ${0}
+	abstract
 snippet fi
-	final ${0}
+	final
 snippet st
-	static ${0}
+	static
 snippet sy
-	synchronized ${0}
+	synchronized
 ##
 ## Error Methods
 snippet err
@@ -137,30 +110,12 @@ snippet errln
 ## Exception Handling
 snippet as
 	assert ${1:test} : "${2:Failure message}";
-snippet ae
-	assertEquals("${1:Failure message}", ${2:expected}, ${3:actual});
-snippet aae
-	assertArrayEquals("${1:Failure message}", ${2:expecteds}, ${3:actuals});
-snippet af
-	assertFalse("${1:Failure message}", ${2:condition});
-snippet at
-	assertTrue("${1:Failure message}", ${2:condition});
-snippet an
-	assertNull("${1:Failure message}", ${2:object});
-snippet ann
-	assertNotNull("${1:Failure message}", ${2:object});
-snippet ass
-	assertSame("${1:Failure message}", ${2:expected}, ${3:actual});
-snippet asns
-	assertNotSame("${1:Failure message}", ${2:expected}, ${3:actual});
-snippet fa
-	fail("${1:Failure message}");
 snippet ca
 	catch(${1:Exception} ${2:e}) ${0}
 snippet thr
-	throw ${0}
+	throw
 snippet ths
-	throws ${0}
+	throws
 snippet try
 	try {
 		${0}
@@ -189,7 +144,7 @@ snippet @au
 snippet @br
 	@brief ${0:Description}
 snippet @fi
-	@file ${0:`vim_snippets#Filename("$1")`}.java
+	@file ${0:`vim_snippets#Filename()`}.java
 snippet @pa
 	@param ${0:param}
 snippet @re
@@ -226,8 +181,6 @@ snippet printf
 	System.out.printf("${1:Message}", ${0:args});
 snippet println
 	System.out.println(${0});
-snippet printlna
-	System.out.println(Arrays.toString(${0}));
 ##
 ## Render Methods
 snippet ren
@@ -253,7 +206,7 @@ snippet get
 ##
 ## Terminate Methods or Loops
 snippet re
-	return ${0}
+	return
 snippet br
 	break;
 ##
