@@ -1,16 +1,9 @@
-########################################
-# Ruby snippets - for Rails, see below #
-########################################
-
-# encoding for Ruby 1.9
 snippet enc
 	# encoding: utf-8
-
-# #!/usr/bin/env ruby
+snippet frozen
+	# frozen_string_literal: true
 snippet #!
 	#!/usr/bin/env ruby
-	# encoding: utf-8
-
 # New Block
 snippet =b
 	=begin rdoc
@@ -33,15 +26,12 @@ snippet beg
 		${0}
 	rescue ${1:Exception} => ${2:e}
 	end
-
 snippet req require
 	require "${1}"
 snippet reqr
 	require_relative "${1}"
 snippet #
 	# =>
-snippet end
-	__END__
 snippet case
 	case ${1:object}
 	when ${2:condition}
@@ -49,7 +39,7 @@ snippet case
 	end
 snippet when
 	when ${1:condition}
-		${0}
+		${0:${VISUAL}}
 snippet def
 	def ${1:method_name}
 		${0}
@@ -66,24 +56,32 @@ snippet descendants
 	end
 snippet if
 	if ${1:condition}
-		${0}
+		${0:${VISUAL}}
 	end
 snippet ife
 	if ${1:condition}
-		${2}
+		${2:${VISUAL}}
 	else
 		${0}
 	end
 snippet eif
 	elsif ${1:condition}
-		${0}
+		${0:${VISUAL}}
+snippet ifee
+	if ${1:condition}
+		$2
+	elsif ${3:condition}
+		$4
+	else
+		$0
+	end
 snippet unless
 	unless ${1:condition}
-		${0}
+		${0:${VISUAL}}
 	end
 snippet wh
 	while ${1:condition}
-		${0}
+		${0:${VISUAL}}
 	end
 snippet for
 	for ${1:e} in ${2:c}
@@ -91,35 +89,29 @@ snippet for
 	end
 snippet until
 	until ${1:condition}
-		${0}
+		${0:${VISUAL}}
 	end
 snippet cla class .. end
 	class ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`}
 		${0}
 	end
-snippet cla class .. initialize .. end
+snippet clai class .. initialize .. end
 	class ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`}
 		def initialize(${2:args})
 			${0}
 		end
 	end
-snippet cla class .. < ParentClass .. initialize .. end
+snippet cla< class .. < ParentClass .. initialize .. end
 	class ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} < ${2:ParentClass}
 		def initialize(${3:args})
 			${0}
 		end
 	end
-snippet cla ClassName = Struct .. do .. end
-	${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} = Struct.new(:${2:attr_names}) do
-		def ${3:method_name}
-			${0}
-		end
-	end
-snippet cla class BlankSlate .. initialize .. end
+snippet blankslate class BlankSlate .. initialize .. end
 	class ${0:BlankSlate}
 		instance_methods.each { |meth| undef_method(meth) unless meth =~ /\A__/ }
 	end
-snippet cla class << self .. end
+snippet claself class << self .. end
 	class << ${1:self}
 		${0}
 	end
@@ -135,27 +127,6 @@ snippet cla-
 snippet mod module .. end
 	module ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`}
 		${0}
-	end
-snippet mod module .. module_function .. end
-	module ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`}
-		module_function
-
-		${0}
-	end
-snippet mod module .. ClassMethods .. end
-	module ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`}
-		module ClassMethods
-			${0}
-		end
-
-		module InstanceMethods
-
-		end
-
-		def self.included(receiver)
-			receiver.extend         ClassMethods
-			receiver.send :include, InstanceMethods
-		end
 	end
 # attr_reader
 snippet r
@@ -968,6 +939,10 @@ snippet desc
 	describe ${1:`substitute(substitute(vim_snippets#Filename(), '_spec$', '', ''), '\(_\|^\)\(.\)', '\u\2', 'g')`} do
 		${0}
 	end
+snippet rdesc
+	RSpec.describe ${1:`substitute(substitute(vim_snippets#Filename(), '_spec$', '', ''), '\(_\|^\)\(.\)', '\u\2', 'g')`} do
+		${0}
+	end
 snippet descm
 	describe "${1:#method}" do
 		${0:pending "Not implemented"}
@@ -1000,6 +975,8 @@ snippet expb
 	expect { ${1:object} }.to ${0}
 snippet experr
 	expect { ${1:object} }.to raise_error ${2:StandardError}, /${0:message_regex}/
+snippet allow
+	allow(${1:object}).to ${0}
 snippet shared
 	shared_examples ${0:"shared examples name"}
 snippet ibl
@@ -1014,74 +991,15 @@ snippet is
 	it { should ${0} }
 snippet isn
 	it { should_not ${0} }
-#ShouldaMatchers#ActionController
-snippet isfp
-	it { should filter_param :${0:key} }
-snippet isrt
-	it { should redirect_to ${0:url} }
-snippet isrtp
-	it { should render_template ${0} }
-snippet isrwl
-	it { should render_with_layout ${0} }
-snippet isrf
-	it { should rescue_from ${0:exception} }
-snippet isrw
-	it { should respond_with ${0:status} }
-snippet isr
-	it { should route(:${1:method}, '${0:path}') }
-snippet isss
-	it { should set_session :${0:key} }
-snippet issf
-	it { should set_the_flash('${0}') }
-#ShouldaMatchers#ActiveModel
-snippet isama
-	it { should allow_mass_assignment_of :${0} }
-snippet isav
-	it { should allow_value(${1}).for :${0} }
-snippet isee
-	it { should ensure_exclusion_of :${0} }
-snippet isei
-	it { should ensure_inclusion_of :${0} }
-snippet isel
-	it { should ensure_length_of :${0} }
-snippet isva
-	it { should validate_acceptance_of :${0} }
-snippet isvc
-	it { should validate_confirmation_of :${0} }
-snippet isvn
-	it { should validate_numericality_of :${0} }
-snippet isvp
-	it { should validate_presence_of :${0} }
-snippet isvu
-	it { should validate_uniqueness_of :${0} }
-#ShouldaMatchers#ActiveRecord
-snippet isana
-	it { should accept_nested_attributes_for :${0} }
-snippet isbt
-	it { should belong_to :${0} }
-snippet isbtcc
-	it { should belong_to(:${1}).counter_cache ${0:true} }
-snippet ishbtm
-	it { should have_and_belong_to_many :${0} }
-snippet isbv
-	it { should be_valid }
-snippet ishc
-	it { should have_db_column :${0} }
-snippet ishi
-	it { should have_db_index :${0} }
-snippet ishm
-	it { should have_many :${0} }
-snippet ishmt
-	it { should have_many(:${1}).through :${0} }
-snippet isho
-	it { should have_one :${0} }
-snippet ishro
-	it { should have_readonly_attribute :${0} }
-snippet iss
-	it { should serialize :${0} }
-snippet isres
-	it { should respond_to :${0} }
-snippet isresw
-	it { should respond_to(:${1}).with(${0}).arguments }
-snippet super_call
-	${1:super_class}.instance_method(:${0:method}).bind(self).call
+snippet iexp
+	it { expect(${1:object}).${2} ${0} }
+snippet iexpb
+	it { expect { ${1:object} }.${2} ${0} }
+snippet iiexp
+	it { is_expected.to ${0} }
+snippet iiexpn
+	it { is_expected.not_to ${0} }
+snippet agg
+	aggregate_failures '${1:message}' do
+		${0}
+	end

@@ -1,5 +1,10 @@
 snippet #!
-	#!/usr/bin/env python
+	#!/usr/bin/env python3
+snippet #!2
+	#!/usr/bin/env python2
+	# -*- coding: utf-8 -*-
+snippet #!3
+	#!/usr/bin/env python3
 snippet imp
 	import ${0:module}
 snippet uni
@@ -51,36 +56,13 @@ snippet matplotlib
 snippet license
 	# This file is part of ${1:app} ${2}.
 
-	# $1 is free software: you can redistribute it and/or modify
-	# it under the terms of the GNU General Public License as published by
-	# the Free Software Foundation, either version 3 of the License, or
-	# (at your option) any later version.
+# Unittest skip
+snippet sk "skip unittests" b
+	@unittest.skip(${1:skip_reason})
 
-	# $1 is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	# You should have received a copy of the GNU General Public License
-	# along with $1.  If not, see <http://www.gnu.org/licenses/>.
-	
-snippet moose_license
-	# This file is part of MOOSE simulator: http://moose.ncbs.res.in.
-
-	# MOOSE is free software: you can redistribute it and/or modify
-	# it under the terms of the GNU General Public License as published by
-	# the Free Software Foundation, either version 3 of the License, or
-	# (at your option) any later version.
-
-	# MOOSE is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	# You should have received a copy of the GNU General Public License
-	# along with MOOSE.  If not, see <http://www.gnu.org/licenses/>.
-	
 snippet wh
 	while ${1:condition}:
-		${0}
+		${0:${VISUAL}}
 # dowh - does the same as do...while in other languages
 snippet dowh
 	while True:
@@ -89,7 +71,10 @@ snippet dowh
 			break
 snippet with
 	with ${1:expr} as ${2:var}:
-		${0}
+		${0:${VISUAL}}
+snippet awith
+	async with ${1:expr} as ${2:var}:
+		${0:${VISUAL}}
 # New Class
 snippet cl
 	class ${1:ClassName}(${2:object}):
@@ -97,6 +82,14 @@ snippet cl
 		def __init__(self, ${4:arg}):
 			${5:super($1, self).__init__()}
 			self.$4 = $4
+			${0}
+snippet cla
+	class ${1:class_name}:
+		"""${0:description}"""
+snippet clai
+	class ${1:class_name}:
+		"""${2:description}"""
+		def __init__(self, ${3:args}):
 			${0}
 # New Function
 snippet def
@@ -106,10 +99,24 @@ snippet def
 snippet deff
 	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
 		${0}
+snippet adef
+	async def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
+		"""${3:docstring for $1}"""
+		${0}
+snippet adeff
+	async def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
+		${0}
 # New Method
-snippet defs
+snippet defi
+	def __init__(self, ${1:args}):
+		${0}
+snippet defm
 	def ${1:mname}(self, ${2:arg}):
 		${0}
+snippet adefm
+	async def ${1:mname}(self, ${2:arg}):
+		${0}
+
 # New Property
 snippet property
 	def ${1:foo}():
@@ -125,13 +132,13 @@ snippet property
 # Ifs
 snippet if
 	if ${1:condition}:
-		${0}
+		${0:${VISUAL}}
 snippet el
 	else:
-		${0}
+		${0:${VISUAL}}
 snippet ei
 	elif ${1:condition}:
-		${0}
+		${0:${VISUAL}}
 # For
 snippet for
 	for ${1:item} in ${2:items}:
@@ -146,31 +153,35 @@ snippet cascii
 # Lambda
 snippet ld
 	${1:var} = lambda ${2:vars} : ${0:action}
+snippet ret
+	return ${0}
 snippet .
 	self.
+snippet sa self.attribute = attribute
+	self.${1:attribute} = $1
 snippet try Try/Except
 	try:
-		${1}
-	except ${2:Exception}, ${3:e}:
+		${1:${VISUAL}}
+	except ${2:Exception} as ${3:e}:
 		${0:raise $3}
-snippet try Try/Except/Else
+snippet trye Try/Except/Else
 	try:
-		${1}
-	except ${2:Exception}, ${3:e}:
+		${1:${VISUAL}}
+	except ${2:Exception} as ${3:e}:
 		${4:raise $3}
 	else:
 		${0}
-snippet try Try/Except/Finally
+snippet tryf Try/Except/Finally
 	try:
-		${1}
-	except ${2:Exception}, ${3:e}:
+		${1:${VISUAL}}
+	except ${2:Exception} as ${3:e}:
 		${4:raise $3}
 	finally:
 		${0}
-snippet try Try/Except/Else/Finally
+snippet tryef Try/Except/Else/Finally
 	try:
-		${1}
-	except ${2:Exception}, ${3:e}:
+		${1:${VISUAL}}
+	except ${2:Exception} as ${3:e}:
 		${4:raise $3}
 	else:
 		${5}
@@ -185,18 +196,37 @@ snippet _
 	__${1:init}__
 # python debugger (pdb)
 snippet pdb
-	import pdb; pdb.set_trace()
+	__import__('pdb').set_trace()
+# bpython debugger (bpdb)
+snippet bpdb
+	__import__('bpdb').set_trace()
 # ipython debugger (ipdb)
 snippet ipdb
-	import ipdb; ipdb.set_trace()
-# ipython debugger (pdbbb)
-snippet pdbbb
-	import pdbpp; pdbpp.set_trace()
+	__import__('ipdb').set_trace()
+# embed ipython itself
+snippet iem
+	__import__('IPython').embed()
+# remote python debugger (rpdb)
+snippet rpdb
+	__import__('rpdb').set_trace()
+# web python debugger (wdb)
+snippet wdb
+	__import__('wdb').set_trace()
+# ptpython
+snippet ptpython
+	__import__('ptpython.repl', fromlist=('repl')).embed(globals(), locals(), vi_mode=${1:False}, history_filename=${2:None})
 # python console debugger (pudb)
 snippet pudb
-	import pudb; pudb.set_trace()
+	__import__('pudb').set_trace()
+# python console debugger remote (pudb)
+snippet pudbr
+	from pudb.remote import set_trace
+	set_trace()
+# pdb in nosetests
+snippet nosetrace
+	__import__('nose').tools.set_trace()
 snippet pprint
-	import pprint; pprint.pprint(${1})
+	__import__('pprint').pprint(${1})
 snippet "
 	"""
 	${0:doc}
@@ -214,6 +244,11 @@ snippet testcase
 
 		def test_${2:description}(self):
 			${0}
+# test given when then
+snippet tgwt
+	# given: ${1}
+	# when: ${2}
+	# then: ${3}
 snippet fut
 	from __future__ import ${0}
 #getopt
@@ -233,22 +268,36 @@ snippet getopt
 			${0}
 		elif option in ("-v", "--verbose"):
 			verbose = argument
+# argparse
+snippet addp
+	parser = ${VISUAL:argparse.}ArgumentParser()
+snippet addsp
+	${0:sub_parser} = parser.add_subparsers().add_parser("${1:name}")
+snippet addarg
+	parser.add_argument("${0:short_arg}", "${1:long_arg}", default=${2:None}, help="${3:Help text}")
+snippet addnarg
+	parser.add_argument("${0:arg}", nargs="${1:*}", default"${2:None}, help="${3:Help text}")
+snippet addaarg
+	parser.add_argument("${0:arg}", "${1:long_arg}", action="${2:store_true}", default=${3:False}, help="${4:Help text}")
+snippet pargs
+	"${VISUAL:return }"parser.parse_args()
+
 # logging
 # glog = get log
 snippet glog
 	import logging
-	logger = logging.getLogger(${0:__name__})
+	LOGGER = logging.getLogger(${0:__name__})
 snippet le
-	logger.error(${0:msg})
+	LOGGER.error(${0:msg})
 # conflict with lambda=ld, therefor we change into Logger.debuG
 snippet lg
-	logger.debug(${0:msg})
+	LOGGER.debug(${0:msg})
 snippet lw
-	logger.warning(${0:msg})
+	LOGGER.warning(${0:msg})
 snippet lc
-	logger.critical(${0:msg})
+	LOGGER.critical(${0:msg})
 snippet li
-	logger.info(${0:msg})
+	LOGGER.info(${0:msg})
 snippet epydoc
 	"""
 	${1:Description}
@@ -261,148 +310,189 @@ snippet epydoc
 
 	@raise e: ${0: Description}
 	"""
+snippet dol
+	def ${1:__init__}(self, *args, **kwargs):
+	    super(${0:ClassName}, self).$1(*args, **kwargs)
+snippet kwg
+	self.${1:var_name} = kwargs.get('$1', ${2:None})
+snippet lkwg
+	${1:var_name} = kwargs.get('$1', ${2:None})
+snippet args
+	*args${1:,}${0}
+snippet kwargs
+	**kwargs${1:,}${0}
+snippet akw
+	*args, **kwargs${1:,}${0}
 
-snippet embed
-	from IPython import embed
-	embed()
+# comprehensions
+snippet lcp list comprehension
+	[${1} for ${2} in ${3:${VISUAL}}]${0}
 
-snippet logger
-	import logging
-	logging.basicConfig(level=logging.DEBUG,
-		format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-		datefmt='%m-%d %H:%M',
-		filename='${0:default}.log',
-		filemode='w')
-	console = logging.StreamHandler()
-	console.setLevel(logging.INFO)
-	formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
-	console.setFormatter(formatter)
-	_logger = logging.getLogger('${1:}')
-	_logger.addHandler(console)
+snippet dcp dict comprehension
+	{${1}: ${2} for ${3} in ${4:${VISUAL}}}${0}
 
-snippet clog
-	import logging
-	formatter = logging.Formatter(
-			'%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-			)
-	ch = logging.StreamHandler()
-	ch.setFormatter(formatter)
-	logging.getLogger('').addHandler(ch)
+snippet scp set comprehension
+	{${1} for ${2} in ${3:${VISUAL}}}${0}
 
-snippet timestamp
-	stamp = datetime.datetime.now().isoformat()
+snippet contain "methods for emulating a container type" b
+	def __len__(self):
+		${1:pass}
 
-snippet argparse
-	import argparse
-	# Argument parser.
-	description = '''${0:description}'''
-	parser = argparse.ArgumentParser(description=description)
-	parser.add_argument('--input', '-i'
-	    , required = True
-	    , help = 'Input file'
-	    )
-	parser.add_argument('--output', '-o'
-	    , required = False
-	    , help = 'Output file'
-	    )
-	parser.add_argument( '--debug', '-d'
-	    , required = False
-	    , default = 0
-	    , type = int
-	    , help = 'Enable debug mode. Default 0, debug level'
-	    )
-	class Args: pass 
-	args = Args()
-	parser.parse_args(namespace=args)
+	def __getitem__(self, key):
+		${2:pass}
 
-snippet arg
-	parser.add_argument('--${0:var}', '-${1:v}'
-	    , required = False
-	    , help = '${2:Help}'
-	    )
-snippet arggroup
-	group = parser.add_mutually_exclusive_group()
-	group.add_argument("-${0:param1}", "--$0", help="${1}")
-	group.add_argument("-${2:param2}", "--$2", help="${3}")
+	def __setitem__(self, key, value):
+		${3:pass}
 
-snippet savefigs
-	for i in plt.get_fignums():
-		filename = __file__+"_{}.png".format(i)
-		plt.figure(i)
-		print(("\t++ Storing figure {} to {}".format(i, filename)))
-		plt.savefig(filename)
+	def __delitem__(self, key):
+		${4:pass}
 
-snippet cython
-	"""${0:`Filename('$1.pyx', 'unknown.pyx')`}: ${1}
+	def __iter__(self):
+		${5:pass}
 
-	"""
-	__author__           = "`g:snips_author`"
-	__copyright__        = "Copyright 2013, Dilawar Singh"
-	__license__          = "GPL"
-	__version__          = "1.0.0"
-	__maintainer__       = "`g:snips_author`"
-	__email__            = "`g:snips_email`"
-	__status__           = "Development"
+	def __reversed__(self):
+		${6:pass}
 
-	import sys
-	import os
-	from distutils.core import setup
-	from Cython.Build import cythonize
+	def __contains__(self, item):
+		${7:pass}
 
-	os.environ['CC'] = "g++"
-	os.environ['CXX'] = "g++"
+snippet context "context manager methods" b
+	def __enter__(self):
+		${1:pass}
 
-	setup(
-		name = "${0:My stupid app}",
-		ext_modules = cythonize("${1:*.pyx}")
-		)
-	
-snippet setup
-	import os
-	import sys
-	try:
-		from setuptools import setup
-	except ImportError:
-		from distutils.core import setup
+	def __exit__(self, exc_type, exc_value, traceback):
+		${2:pass}
 
-	with open("README.md") as f:
-		readme = f.read()
-	classifiers = [
-		'Development Status :: 4 - Beta',
-		'Intended Audience :: Developers',
-		'License :: OSI Approved :: MIT License',
-		'Operating System :: OS Independent',
-		'Programming Language :: Python',
-		'Programming Language :: Python :: 2.6',
-		'Programming Language :: Python :: 2.7',
-		]
+snippet attr "methods for customizing attribute access" b
+	def __getattr__(self, name):
+		${1:pass}
 
-	setup(
-		name = "${1:name}",
-	    version = "0.0.1",
-	    description = "${2:Short description of package}",
-	    long_description = readme,
-	    packages = ["${3:package}" ],
-	    package_data = {},
-	    install_requires = [ ],
-	    author = "`g:snips_author`",
-	    author_email = "`g:snips_email`",
-	    url = "${3:http://github.com/dilawar/}",
-	    license='GPL',
-	    classifiers=classifiers,
-	)
-snippet legend
-	plt.legend(loc='best', framealpha=0.4)
-snippet datadir
-	import os, datetime
-	now = datetime.datetime.now()
-	datadir = "_data/%s" % (now.strftime('%Y%m%d-%H%M'))
-	if not os.path.isdir(datadir): os.makedirs(datadir)
+	def __setattr__(self, name, value):
+		${2:pass}
 
-snippet _debug
-	debug_level_ = 1
-	def debug__( msg, level = 1 ):
-	    # Print debug message depending on level
-	    global debug_level_ 
-	    if type(msg) == list: msg = '\n|- '.join(msg)
-	    if level >= debug_level_: print( msg )
+	def __delattr__(self, name):
+		${3:pass}
+
+snippet desc "methods implementing descriptors" b
+	def __get__(self, instance, owner):
+		${1:pass}
+
+	def __set__(self, instance, value):
+		${2:pass}
+
+	def __delete__(self, instance):
+		${3:pass}
+
+snippet cmp "methods implementing rich comparison"
+	def __eq__(self, other):
+		${1:pass}
+
+	def __ne__(self, other):
+		${2:pass}
+
+	def __lt__(self, other):
+		${3:pass}
+
+	def __le__(self, other):
+		${4:pass}
+
+	def __gt__(self, other):
+		${5:pass}
+
+	def __ge__(self, other):
+		${6:pass}
+
+	def __cmp__(self, other):
+		${7:pass}
+
+snippet repr "methods implementing string representation"
+	def __repr__(self):
+		${1:pass}
+
+	def __str__(self):
+		${2:pass}
+
+	def __unicode__(self):
+		${3:pass}
+
+# note: reflected operands and augmented arithmeitc assignements have been
+# intentionally ommited to reduce verbosity.
+snippet numeric "methods for emulating a numeric type" b
+	def __add__(self, other):
+		${1:pass}
+
+	def __sub__(self, other):
+		${2:pass}
+
+	def __mul__(self, other):
+		${3:pass}
+
+	def __div__(self, other):
+		${4:pass}
+
+	def __truediv__(self, other):
+		${5:pass}
+
+	def __floordiv__(self, other):
+		${6:pass}
+
+	def __mod__(self, other):
+		${7:pass}
+
+	def __divmod__(self, other):
+		${8:pass}
+
+	def __pow__(self, other):
+		${9:pass}
+
+	def __lshift__(self, other):
+		${10:pass}
+
+	def __rshift__(self, other):
+		${11:pass}
+
+	def __and__(self, other):
+		${12:pass}
+
+	def __xor__(self, other):
+		${13:pass}
+
+	def __or__(self, other):
+		${14:pass}
+
+	def __neg__(self):
+		${15:pass}
+
+	def __pos__(self):
+		${16:pass}
+
+	def __abs__(self):
+		${17:pass}
+
+	def __invert__(self):
+		${18:pass}
+
+	def __complex__(self):
+		${19:pass}
+
+	def __int__(self):
+		${20:pass}
+
+	def __long__(self):
+		${21:pass}
+
+	def __float__(self):
+		${22:pass}
+
+	def __oct__(self):
+		${22:pass}
+
+	def __hex__(self):
+		${23:pass}
+
+	def __index__(self):
+		${24:pass}
+
+	def __coerce__(self, other):
+		${25:pass}
+
