@@ -12,6 +12,7 @@ snippet uni
 		${0:representation}
 snippet from
 	from ${1:package} import ${0:module}
+
 # Module Docstring
 snippet docs
 	"""
@@ -21,25 +22,10 @@ snippet docs
 	Github: `g:snips_github`
 	Description: ${0}
 	"""
-snippet header 
 
-	"""${0:`Filename('$1.py', 'unknown.py')`}: ${1}
-
-	"""
-		
-	__author__           = "`g:snips_author`"
-	__copyright__        = "Copyright 2016, `g:snips_author`"
-	__credits__          = ["NCBS Bangalore"]
-	__license__          = "GNU GPL"
-	__version__          = "1.0.0"
-	__maintainer__       = "`g:snips_author`"
-	__email__            = "`g:snips_email`"
-	__status__           = "Development"
-
-	import sys
-	import os
-	import matplotlib.pyplot as plt
-	import numpy as np
+snippet header
+	__author__ = "`g:snips_author`"
+        __email__ = "`g:snips_email`"
 
 snippet matplotlib 
 	import matplotlib as mpl
