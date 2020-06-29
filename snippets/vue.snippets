@@ -187,3 +187,17 @@ snippet trans
 snippet transc
 	$t('$1', { $2: $3 })
 
+snippet autocomplete
+	<v-autocomplete  slot="input"
+	     ref="refEventSpeaker"
+	     input-class="form-control"
+	     placeholder="Email (you can add a new speaker if none found)"
+	     results-property="email"
+	     results-display="name"
+	     :request-headers="apiPostData()"
+	     method="post"
+	     @selected="onSpeakerSelected"
+	     @results="foundSpeakersOnSearch"
+	     @noResults="createNewSpeaker=true"
+	     :source="(q)=>searchPeopleURI(q, 'speaker')">
+	     </v-autocomplete>
