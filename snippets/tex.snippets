@@ -18,6 +18,17 @@ snippet pre
 
 	\end{document}          
 
+snippet standalone
+	\documentclass[a4paper,10pt]{standalone}
+	\usepackage{pgf,tikz}
+	\usepackage{amsmath}
+	\usepackage{amssymb}
+	\usetikzlibrary{shapes,backgrounds,decorations,decorations.pathmorphing}
+	% Title Page
+	\begin{document}
+	\end{document}          
+
+
 #newcommand
 snippet nc \newcommand
 	\\newcommand{\\${1:cmd}}[${2:opt}]{${3:realcmd}} ${0}
