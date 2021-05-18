@@ -57,6 +57,10 @@ snippet [
 snippet always
 	{ ${1:try} } always { ${0:always} }
 snippet fun
-	function ${1:name} (${2:args}) {
-		${0:# body}
+	${1:function_name}() {
+		${0:# function_body}
+	}
+snippet ffun
+	function ${1:function_name}() {
+		${0:# function_body}
 	}

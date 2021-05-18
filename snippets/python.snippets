@@ -3,8 +3,6 @@ snippet #!
 snippet #!2
 	#!/usr/bin/env python2
 	# -*- coding: utf-8 -*-
-snippet utf
-	# -*- coding: utf-8 -*-
 snippet #!3
 	#!/usr/bin/env python3
 snippet imp
@@ -14,7 +12,6 @@ snippet uni
 		${0:representation}
 snippet from
 	from ${1:package} import ${0:module}
-
 # Module Docstring
 snippet docs
 	"""
@@ -24,25 +21,6 @@ snippet docs
 	Github: `g:snips_github`
 	Description: ${0}
 	"""
-
-snippet header
-	__author__ = "`g:snips_author`"
-	__email__ = "`g:snips_email`"
-
-snippet matplotlib 
-	import matplotlib as mpl
-	import matplotlib.pyplot as plt
-	try:
-	    mpl.style.use( 'seaborn-talk' )
-	except Exception as e:
-	    pass
-	mpl.rcParams['axes.linewidth'] = 0.1
-	plt.rc('text', usetex=True)
-	plt.rc('font', family='serif')
-
-	
-snippet license
-	# This file is part of ${1:app} ${2}.
 
 # Unittest skip
 snippet sk "skip unittests" b
@@ -216,8 +194,7 @@ snippet nosetrace
 snippet pprint
 	__import__('pprint').pprint(${1})
 snippet "
-	"""
-	${0:doc}
+	"""${0:doc}
 	"""
 # assertions
 snippet a=
@@ -239,7 +216,23 @@ snippet tgwt
 	# then: ${3}
 snippet fut
 	from __future__ import ${0}
+#getopt
+snippet getopt
+	try:
+		# Short option syntax: "hv:"
+		# Long option syntax: "help" or "verbose="
+		opts, args = getopt.getopt(sys.argv[1:], "${1:short_options}", [${2:long_options}])
 
+	except getopt.GetoptError, err:
+		# Print debug info
+		print str(err)
+		${3:error_action}
+
+	for option, argument in opts:
+		if option in ("-h", "--help"):
+			${0}
+		elif option in ("-v", "--verbose"):
+			verbose = argument
 # argparse
 snippet addp
 	parser = ${VISUAL:argparse.}ArgumentParser()
@@ -253,10 +246,6 @@ snippet addaarg
 	parser.add_argument("${0:arg}", "${1:long_arg}", action="${2:store_true}", default=${3:False}, help="${4:Help text}")
 snippet pargs
 	"${VISUAL:return }"parser.parse_args()
-snippet argparse
-	parser = ${VISUAL:argparse.}ArgumentParser()
-	parser.add_argument("${0:short_arg}", "${1:long_arg}", default=${2:None}, help="${3:Help text}")
-	args = parser.parse_args()
 
 # logging
 # glog = get log
@@ -275,8 +264,7 @@ snippet lc
 snippet li
 	LOGGER.info(${0:msg})
 snippet epydoc
-	"""
-	${1:Description}
+	"""${1:Description}
 
 	@param ${2:param}: ${3: Description}
 	@type  $2: ${4: Type}
@@ -472,14 +460,3 @@ snippet numeric "methods for emulating a numeric type" b
 	def __coerce__(self, other):
 		${25:pass}
 
-snippet info
-	print(f'[INFO] ${0}')
-    
-snippet warn
-	print(f'[WARN] ${0}')
-
-snippet debug
-	print(f'[DEBUG] ${0}')
-
-snippet error
-	print(f'[ERROR] ${0}')

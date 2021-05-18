@@ -196,32 +196,32 @@ snippet ctor
 # properties - auto properties by default.
 # default type is int with layout get / set.
 snippet prop
-	${1:public} ${2:int} ${3:} { get; set; }
+	${1:public} ${2:int} ${3} { get; set; }
 snippet p
-	${1:public} ${2:int} ${3:} { get; set; }
+	${1:public} ${2:int} ${3} { get; set; }
 snippet p+
-	public ${1:int} ${2:} { get; set; }
+	public ${1:int} ${2} { get; set; }
 snippet p+&
-	public ${1:int} ${2:} { get; internal set; }
+	public ${1:int} ${2} { get; internal set; }
 snippet p+|
-	public ${1:int} ${2:} { get; protected set; }
+	public ${1:int} ${2} { get; protected set; }
 snippet p+-
-	public ${1:int} ${2:} { get; private set; }
+	public ${1:int} ${2} { get; private set; }
 snippet p&
-	internal ${1:int} ${2:} { get; set; }
+	internal ${1:int} ${2} { get; set; }
 snippet p&|
-	internal ${1:int} ${2:} { get; protected set; }
+	internal ${1:int} ${2} { get; protected set; }
 snippet p&-
-	internal ${1:int} ${2:} { get; private set; }
+	internal ${1:int} ${2} { get; private set; }
 snippet p|
-	protected ${1:int} ${2:} { get; set; }
+	protected ${1:int} ${2} { get; set; }
 snippet p|-
-	protected ${1:int} ${2:} { get; private set; }
+	protected ${1:int} ${2} { get; private set; }
 snippet p-
-	private ${1:int} ${2:} { get; set; }
+	private ${1:int} ${2} { get; set; }
 # property - bool
 snippet pi
-	${1:public} int ${2:} { get; set; }
+	${1:public} int ${2} { get; set; }
 snippet pi+
 	public int ${1} { get; set; }
 snippet pi+&
@@ -244,7 +244,7 @@ snippet pi-
 	private int ${1} { get; set; }
 # property - bool
 snippet pb
-	${1:public} bool ${2:} { get; set; }
+	${1:public} bool ${2} { get; set; }
 snippet pb+
 	public bool ${1} { get; set; }
 snippet pb+&
@@ -267,7 +267,7 @@ snippet pb-
 	private bool ${1} { get; set; }
 # property - string
 snippet ps
-	${1:public} string ${2:} { get; set; }
+	${1:public} string ${2} { get; set; }
 snippet ps+
 	public string ${1} { get; set; }
 snippet ps+&

@@ -186,34 +186,4 @@ snippet trans
 # Translation with parameter
 snippet transc
 	$t('$1', { $2: $3 })
-	
-# popup
-snippet popup
-	<f7-popup :opened="popupOpened" @popup:closed="popupOpened = false">
-	  <f7-page>
-	    <f7-navbar title="Popup">
-	      <f7-nav-right>
-	        <f7-link popup-close>Cancel</f7-link>
-	       </f7-nav-right>
-	    </f7-navbar>
-
-	    <f7-block>
-	    </f7-block>
-	  </f7-page>
-	</f7-popup>
-
-snippet autocomplete
-	<v-autocomplete  slot="input"
-	     ref="refEventSpeaker"
-	     input-class="form-control"
-	     placeholder="Email (you can add a new speaker if none found)"
-	     results-property="email"
-	     results-display="name"
-	     :request-headers="apiPostData()"
-	     method="post"
-	     @selected="onSpeakerSelected"
-	     @results="foundSpeakersOnSearch"
-	     @noResults="createNewSpeaker=true"
-	     :source="(q)=>searchPeopleURI(q, 'speaker')">
-	</v-autocomplete>
 

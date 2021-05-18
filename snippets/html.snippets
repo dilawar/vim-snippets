@@ -129,6 +129,8 @@ snippet a:ext
 	<a href="http://${1:example.com}">${0:$1}</a>
 snippet a:mail
 	<a href="mailto:${1:joe@example.com}?subject=${2:feedback}">${0:email me}</a>
+snippet ac
+	<a href="`@+`">${0:`@+`}</a>
 snippet abbr
 	<abbr title="${1}">${0}</abbr>
 snippet address
@@ -173,7 +175,7 @@ snippet aside#
 		${0}
 	</aside>
 snippet audio
-	<audio src="${1}>${0}</audio>
+	<audio src="${1}">${0}</audio>
 snippet b
 	<b>${0}</b>
 snippet base
@@ -327,6 +329,14 @@ snippet figcaption
 	<figcaption>${0}</figcaption>
 snippet figure
 	<figure>${0}</figure>
+snippet figure#
+	<figure id="${1}">
+		${0}
+	</figure>
+snippet figure.
+	<figure class="${1}">
+		${0}
+	</figure>
 snippet footer
 	<footer>
 		${0}
@@ -340,15 +350,15 @@ snippet footer#
 		${0}
 	</footer>
 snippet form
-	<form action="${1}" method="${2:get}" accept-charset="utf-8">
+	<form action="${1}" method="${2:post}">
 		${0}
 	</form>
 snippet form.
-	<form class="${1}" action="${2}" method="${3:get}" accept-charset="utf-8">
+	<form class="${1}" action="${2}" method="${3:post}">
 		${0}
 	</form>
 snippet form#
-	<form id="${1}" action="${2}" method="${3:get}" accept-charset="utf-8">
+	<form id="${1}" action="${2}" method="${3:post}">
 		${0}
 	</form>
 snippet h1
@@ -428,9 +438,23 @@ snippet html5
 	<!DOCTYPE html>
 	<html>
 		<head>
-			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width">
 			<title>${1:`substitute(vim_snippets#Filename('', 'Page Title'), '^.', '\u&', '')`}</title>
-			${2:meta}
+			${2:link}
+		</head>
+		<body>
+			${0:body}
+		</body>
+	</html>
+snippet html5l
+	<!DOCTYPE html>
+	<html lang="${1:en}">
+		<head>
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width">
+			<title>${2:`substitute(vim_snippets#Filename('', 'Page Title'), '^.', '\u&', '')`}</title>
+			${3:link}
 		</head>
 		<body>
 			${0:body}
@@ -628,11 +652,11 @@ snippet ol
 		${0}
 	</ol>
 snippet ol.
-	<ol class="${1}>
+	<ol class="${1}">
 		${0}
 	</ol>
 snippet ol#
-	<ol id="${1}>
+	<ol id="${1}">
 		${0}
 	</ol>
 snippet ol+
@@ -656,6 +680,10 @@ snippet output
 	<output>${0}</output>
 snippet p
 	<p>${0}</p>
+snippet p.
+	<p class="${1}">${0}</p>
+snippet p#
+	<p id="${1}">${0}</p>
 snippet param
 	<param name="${1}" value="${2}">
 snippet pre
@@ -681,7 +709,13 @@ snippet samp
 		${0}
 	</samp>
 snippet script
-	<script charset="utf-8">
+	<script>
+		${0}
+	</script>
+snippet scripts
+	<script src="${0}.js"></script>
+snippet scriptt
+	<script type="${1}" id="${2}">
 		${0}
 	</script>
 snippet scriptsrc
@@ -736,15 +770,15 @@ snippet summary
 snippet sup
 	<sup>${0}</sup>
 snippet table
-	<table border="${1:0}">
+	<table>
 		${0}
 	</table>
 snippet table.
-	<table class="${1}" border="${2:0}">
+	<table class="${1}">
 		${0}
 	</table>
 snippet table#
-	<table id="${1}" border="${2:0}">
+	<table id="${1}">
 		${0}
 	</table>
 snippet tbody
@@ -761,7 +795,7 @@ snippet td+
 	<td>${1}</td>
 	td+${0}
 snippet textarea
-	<textarea name="${1}" id=${2:$1} rows="${3:8}" cols="${4:40}">${5}</textarea>
+	<textarea name="${1}" id="${2:$1}" rows="${3:8}" cols="${4:40}">${5}</textarea>
 snippet tfoot
 	<tfoot>
 		${0}

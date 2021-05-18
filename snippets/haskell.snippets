@@ -18,6 +18,8 @@ snippet info
 	--
 	-- ${0:Description}
 	--
+snippet imp
+	import ${0:Data.Text}
 snippet import
 	import ${0:Data.Text}
 snippet import2
@@ -79,7 +81,9 @@ snippet => "Type constraint"
 snippet ap
 	${1:map} ${2:fn} ${0:list}
 snippet \
-	\${1:x} -> ${0}
+	\\${1:x} -> ${0:expression}
+snippet (\
+	(\\${1:x} -> ${0:expression})
 snippet <-
 	${1:a} <- ${0:m a}
 snippet ->

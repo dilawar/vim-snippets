@@ -1,32 +1,82 @@
-extends tex
 # Markdown
 
 # Includes octopress (http://octopress.org/) snippets
 
-snippet [
-	[${1:text}](http://${2:address} "${0:title}")
-snippet [*
-	[${1:link}](${2:`@*`} "${3:title}")
+# The suffix `c` stands for "Clipboard".
 
+snippet [
+	[${1:text}](https://${2:address})
+snippet [*
+	[${1:link}](${2:`@*`})
+snippet [c
+	[${1:link}](${2:`@+`})
+snippet ["
+	[${1:text}](https://${2:address} "${3:title}")
+snippet ["*
+	[${1:link}](${2:`@*`} "${3:title}")
+snippet ["c
+	[${1:link}](${2:`@+`} "${3:title}")
 snippet [:
-	[${1:id}]: http://${2:url} "${0:title}"
+	[${1:id}]: https://${2:url}
+
 snippet [:*
-	[${1:id}]: ${2:`@*`} "${0:title}"
+	[${1:id}]: ${2:`@*`}
+
+snippet [:c
+	[${1:id}]: ${2:`@+`}
+
+snippet [:"
+	[${1:id}]: https://${2:url} "${3:title}"
+
+snippet [:"*
+	[${1:id}]: ${2:`@*`} "${3:title}"
+
+snippet [:"c
+	[${1:id}]: ${2:`@+`} "${3:title}"
 
 snippet ![
-	![${1:alttext}](${2:/images/image.jpg} "${0:title}")
+	![${1:alttext}](${2:/images/image.jpg})
 snippet ![*
+	![${1:alt}](${2:`@*`})
+snippet ![c
+	![${1:alt}](${2:`@+`})
+snippet !["
+	![${1:alttext}](${2:/images/image.jpg} "${3:title}")
+snippet !["*
 	![${1:alt}](${2:`@*`} "${3:title}")
-
+snippet !["c
+	![${1:alt}](${2:`@+`} "${3:title}")
 snippet ![:
-	![${1:id}]: ${2:url} "${0:title}"
-snippet ![:*
-	![${1:id}]: ${2:`@*`} "${0:title}"
+	![${1:id}]: ${2:url}
 
+snippet ![:*
+	![${1:id}]: ${2:`@*`}
+
+snippet ![:"
+	![${1:id}]: ${2:url} "${3:title}"
+
+snippet ![:"*
+	![${1:id}]: ${2:`@*`} "${3:title}"
+
+snippet ![:"c
+	![${1:id}]: ${2:`@+`} "${3:title}"
+
+snippet <
+	<http://${1:url}>
+snippet <*
+	<`@*`>
+snippet <c
+	<`@+`>
+snippet **
+	**${1:bold}**
+snippet __
+	__${1:bold}__
 snippet ===
 	`repeat('=', strlen(getline(line('.') - 3)))`
 
 	${0}
+snippet -
+	-   ${0}
 snippet ---
 	`repeat('-', strlen(getline(line('.') - 3)))`
 
@@ -51,10 +101,11 @@ snippet ```
 	${0:${VISUAL}}
 	\`\`\`
 
-snippet bt-codeblock-full
-	``` ${1:language} ${2:title} ${3:URL} ${4:link_text}
-	${0:code_snippet}
-	```
+# Language.
+snippet ```l
+	\`\`\`${1:language}
+	${2:code}
+	\`\`\`
 
 snippet codeblock-short
 	{% codeblock %}
@@ -91,48 +142,3 @@ snippet pullquote
 	{% pullquote %}
 	${1:text} {" ${2:quote} "} ${0:text}
 	{% endpullquote %}
-snippet blog
-	---
-	title: ${1}
-	status: publish
-	layout: post
-	type: post
-	tags: [${2}]
-	categories: [${3}]
-	comments: true
-	---
-
-snippet header
-	---
-	title: ${1}
-	author: Dilawar Singh
-	date : \today 
-	header-includes:
-		- \usepackage[margin=15mm]{geometry}
-	---
-
-snippet labnote
-	---
-	title: ${1}
-	author: Dilawar Singh
-	date: \today
-	header-includes:
-		- \usepackage{tikz}
-	---
-
-	# Experiment Aim
-
-
-	# Experiment Design
-
-
-	# Experiment Detail 
-
-
-	# Observation
-
-
-	# What next?
-
-
-	# Additional Notes
