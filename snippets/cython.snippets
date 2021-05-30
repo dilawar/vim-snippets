@@ -9,11 +9,12 @@ snippet docs
 	Github: `g:snips_github`
 	Description: ${0}
 	"""
-snippet header 
+
+snippet header
 	"""${0:`Filename('$1.pyx', 'unknown.pyx')`}: ${1}
 
 	"""
-		
+
 	__author__           = "`g:snips_author`"
 	__copyright__        = "Copyright 2013, Dilawar Singh"
 	__license__          = "GPL"
@@ -21,7 +22,7 @@ snippet header
 	__maintainer__       = "`g:snips_author`"
 	__email__            = "`g:snips_email`"
 	__status__           = "Development"
-	
+
 snippet wh
 	while ${1:condition}:
 		${0}
@@ -254,7 +255,7 @@ snippet argparse
              , required = False
              , help = "Optional: Specify a compiler or I'll try to guess on system"
              )
-    class Args: pass 
+    class Args: pass
     args = Args()
     parser.parse_args(namespace=args)
 snippet distutils
