@@ -1,5 +1,34 @@
 #version 1
 #PREAMBLE
+snippet pre
+	\documentclass[a4paper,10pt]{article}
+	\usepackage{pgf,tikz}
+	\usepackage{amsmath}
+	\usepackage{amssymb}
+	\usetikzlibrary{shapes,backgrounds,decorations,decorations.pathmorphing}
+	% Title Page
+	\title{Title here}
+	\author{Dilawar Singh}
+	\date{\today}
+	\begin{document}
+	\maketitle
+	\begin{abstract}
+
+	\end{abstract}
+
+	\end{document}
+
+snippet standalone
+	\documentclass[a4paper,10pt]{standalone}
+	\usepackage{pgf,tikz}
+	\usepackage{amsmath}
+	\usepackage{amssymb}
+	\usetikzlibrary{shapes,backgrounds,decorations,decorations.pathmorphing}
+	% Title Page
+	\begin{document}
+	\end{document}
+
+
 #documentclass without options
 snippet dcl \documentclass{}
 	\\documentclass{${1:class}} ${0}
@@ -29,7 +58,7 @@ snippet begin \begin{} ... \end{} block
 # Maketitle
 snippet mkt maketitle
 	\\maketitle
-	
+
 # Tabular
 snippet tab tabular (or arbitrary) environment
 	\\begin{${1:tabular}}{${2:c}}
@@ -290,6 +319,13 @@ snippet tikzcd* tikzcd environment in equation*
 	\\end{tikzcd}
 	\\end{equation*}
 	${0}
+
+snippet tikz
+	\begin{tikzpicture}[scale=${1:1}
+	    , every node/.style={}
+	    ]
+		${2}
+	\end{tikzpicture}
 #math
 snippet stackrel \stackrel{}{}
 	\\stackrel{${1:above}}{${2:below}} ${0}
