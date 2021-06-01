@@ -255,4 +255,34 @@ snippet und "Underline"
 \underline{$1} $0
 endsnippet
 
+snippet pre "pre"
+\documentclass[a4paper,10pt]{article}
+\usepackage{pgf,tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usetikzlibrary{shapes,backgrounds,decorations,decorations.pathmorphing}
+% Title Page
+\title{Title here}
+\author{Dilawar Singh}
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+
+\end{abstract}
+
+\end{document}
+endsnippet
+
+snippet standalone "standalone"
+\documentclass[a4paper,10pt]{standalone}
+\usepackage{pgf,tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usetikzlibrary{shapes,backgrounds,decorations,decorations.pathmorphing}
+% Title Page
+\begin{document}
+\end{document}
+endsnippet
+
 # vim:ft=snippets:
